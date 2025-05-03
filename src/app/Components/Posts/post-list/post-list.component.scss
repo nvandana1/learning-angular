@@ -1,0 +1,41 @@
+.posts-accordion{
+    display: grid;
+    gap: 10px;
+}
+
+.post-list{
+    padding: 1rem;
+    display: grid;
+    width: 30rem;
+}
+
+.post-content{
+    white-space: pre-wrap;
+    color: #ccc;
+}
+
+.post-card {
+    background: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.actions{
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.delete{
+    color: red;
+}

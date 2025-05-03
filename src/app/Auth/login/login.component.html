@@ -1,0 +1,27 @@
+<div class="login-container">
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+        <p-toast></p-toast>
+
+        <H1>Login</H1>
+
+        <div class="input-group">
+            <input type="email" pInputText placeholder="Enter your email" formControlName="email">
+            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+                <div *ngIf="loginForm.get('email')?.errors?.['required']" class="p-error">Email is required.</div>
+                <div *ngIf="loginForm.get('email')?.errors?.['email']" class="p-error">Invalid email format.</div>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="password" pInputText placeholder="Enter your password" formControlName="password">
+            <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                <div *ngIf="loginForm.get('password')?.errors?.['required']" class="p-error">Password is required.</div>
+                <div *ngIf="loginForm.get('password')?.errors?.['minlength']" class="p-error">Password must be at least 6 characters long.</div>
+                <div *ngIf="loginForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</div>
+                <div *ngIf="loginForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
+            </div>
+        </div>
+        <button pButton label="Login" type="submit"></button>
+        <small routerLink="/register" class="clickable" > New User? Register</small>
+    </form>
+</div>

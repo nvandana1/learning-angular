@@ -1,0 +1,35 @@
+<div class="login-container">
+    <p-toast></p-toast>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="login-form">
+        <H1>Register</H1>
+
+        <div class="input-group">
+            <input type="email" pInputText placeholder="Enter your email" formControlName="email">
+            <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']" class="p-error">Email is required.</div>
+                <div *ngIf="registerForm.get('email')?.errors?.['email']" class="p-error">Invalid email format.</div>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="password" pInputText placeholder="Enter your password" formControlName="password">
+            <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+                <div *ngIf="registerForm.get('password')?.errors?.['required']" class="p-error">Password is required.</div>
+                <div *ngIf="registerForm.get('password')?.errors?.['minlength']" class="p-error">Password must be at least 6 characters long.</div>
+                <div *ngIf="registerForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</div>
+                <div *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="password" pInputText placeholder="Confirm your password" formControlName="confirmPassword">
+            <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="p-error">
+                Password confirmation is required.
+            </div>
+            <div *ngIf="registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value" class="p-error">Password does not match</div>
+
+        </div>
+        <button pButton type="submit" label="Register"></button>
+        <small routerLink="/login">Already a user? Login</small>
+
+    </form>
+</div>

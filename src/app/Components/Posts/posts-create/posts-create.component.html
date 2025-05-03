@@ -1,0 +1,15 @@
+<form [formGroup]="postsForm" (ngSubmit)="createPost()" class="posts-form-container">
+  <div class="field">
+    <input type="text" pInputText placeholder="Title" formControlName="title">
+    <div *ngIf="postsForm.get('title')?.invalid && postsForm.get('title')?.touched" class="p-error">
+      Title is required.
+    </div>
+  </div>
+  <div class="field">
+    <textarea pInputTextarea formControlName="content" rows="5" cols="30" placeholder="Post"></textarea>
+    <div *ngIf="postsForm.get('content')?.invalid && postsForm.get('content')?.touched" class="p-error">
+      Content is required.
+    </div>
+  </div>
+  <button type="submit" pButton label="Save" [disabled]="postsForm.invalid"></button>
+</form>
