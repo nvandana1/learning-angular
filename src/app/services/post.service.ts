@@ -14,7 +14,7 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   createPost(post:Post) {
-    this.http.post(`${this.apiUrl}/post`, post).subscribe({
+    this.http.post(`${this.apiUrl}/posts`, post).subscribe({
       next:(response)=>{
         console.log('Post created successfully', response);
         this.getPosts();
@@ -47,7 +47,7 @@ export class PostService {
   }
 
   deletePost(id: number) {
-    this.http.delete(`${this.apiUrl}/post/${id}`).subscribe({
+    this.http.delete(`${this.apiUrl}/posts/${id}`).subscribe({
       next:(response)=>{
         console.log('Post deleted successfully', response);
         this.getPosts();
@@ -59,7 +59,7 @@ export class PostService {
   }
 
   updatePost(id:number,data:any){
-    this.http.put(`${this.apiUrl}/post/${id}`, data).subscribe({
+    this.http.put(`${this.apiUrl}/posts/${id}`, data).subscribe({
       next:(response)=>{
         console.log('Post updated successfully', response);
         this.getPosts();

@@ -6,7 +6,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const app = express();
 const jwt = require('jsonwebtoken');
-
+const PostRouter = require('./routes/posts.js');
 app.use(cors()); // allow requests from Angular
 
 const port = 3000;
@@ -86,52 +86,53 @@ app.post('/api/login', async (req, res) => {
     }
   });
 
-app.post('/api/post', verifyAccessToken, async (req, res) => {
-  const { title, content } = req.body;
-  const post = new Post({ title, content });
-  try {
-    await post.save();
-    res.status(201).json({ message: 'Post created successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating post' });
-  }
+// app.post('/api/post', verifyAccessToken, async (req, res) => {
+//   const { title, content } = req.body;
+//   const post = new Post({ title, content });
+//   try {
+//     await post.save();
+//     res.status(201).json({ message: 'Post created successfully' });
+//   } catch (error) {
+//     res.status(500).json({ error: 'Error creating post' });
+//   }
 
-})
-app.get('/api/posts', verifyAccessToken, async (req, res) => {
-  try {
-   await Post.find().then((posts) => {
-      res.status(200).json({posts:posts});
-    })
+// })
+// app.get('/api/posts', verifyAccessToken, async (req, res) => {
+//   try {
+//    await Post.find().then((posts) => {
+//       res.status(200).json({posts:posts});
+//     })
     
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching posts' });
-  }
+//   } catch (error) {
+//     res.status(500).json({ error: 'Error fetching posts' });
+//   }
 
-});
-app.delete('/api/post/:id', verifyAccessToken, async (req, res) => {
-  const { id } = req.params;
-  Post.findByIdAndDelete(id).then((post) => {
-    if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
-    }
-    res.status(200).json({ message: 'Post deleted successfully' });
-  }).catch((error) => {
-    res.status(500).json({ error: 'Error deleting post' });
-  });
-})
+// });
+// app.delete('/api/post/:id', verifyAccessToken, async (req, res) => {
+//   const { id } = req.params;
+//   Post.findByIdAndDelete(id).then((post) => {
+//     if (!post) {
+//       return res.status(404).json({ message: 'Post not found' });
+//     }
+//     res.status(200).json({ message: 'Post deleted successfully' });
+//   }).catch((error) => {
+//     res.status(500).json({ error: 'Error deleting post' });
+//   });
+// })
 
-app.put('api/post/:id',verifyAccessToken,(req,res)=>{
-  const { id } = req.params;
-  const { title, content } = req.body;
-  Post.findByIdAndUpdate(id, { title, content }, { new: true }).then((post) => {
-    if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
-    }
-    res.status(200).json({ message: 'Post updated successfully', post });
-  }).catch((error) => {
-    res.status(500).json({ error: 'Error updating post' });
-  });
-})
+// app.put('api/post/:id',verifyAccessToken,(req,res)=>{
+//   const { id } = req.params;
+//   const { title, content } = req.body;
+//   Post.findByIdAndUpdate(id, { title, content }, { new: true }).then((post) => {
+//     if (!post) {
+//       return res.status(404).json({ message: 'Post not found' });
+//     }
+//     res.status(200).json({ message: 'Post updated successfully', post });
+//   }).catch((error) => {
+//     res.status(500).json({ error: 'Error updating post' });
+//   });
+// })
+app.use('/api/posts', PostRouter);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

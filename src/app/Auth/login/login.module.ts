@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoginRoutingModule } from './login-routing.module';
+// import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { InputTextModule } from 'primeng/inputtext';
@@ -13,11 +13,11 @@ import { ToasterService } from 'src/app/services/toaster.service';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    // LoginComponent
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule,
+    // LoginRoutingModule,
     ReactiveFormsModule,
     InputTextModule,
     FormsModule,
@@ -25,7 +25,8 @@ import { ToasterService } from 'src/app/services/toaster.service';
     ToastModule
   ],
   exports:[
-    LoginComponent],
+    // LoginComponent
+  ],
     providers: [
       MessageService,
       ToasterService

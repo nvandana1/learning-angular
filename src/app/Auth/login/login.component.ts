@@ -1,14 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ToasterService } from 'src/app/services/toaster.service';
 import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [
+      CommonModule,
+      ReactiveFormsModule,
+      InputTextModule,
+      FormsModule,
+      ButtonModule,
+      ToastModule
+    ],
+  providers: [
+    MessageService,
+    ToasterService
+  ]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup<any>;
